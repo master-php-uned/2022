@@ -11957,7 +11957,7 @@ fieldset:disabled .btn {
   }
 }
 
-h1, .h1 {
-  color: olivedrab;
+#login {
+  width: 400px;
 }
 /*# sourceMappingURL=styles.css.map */
