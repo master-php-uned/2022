@@ -5,7 +5,12 @@ class IndexController extends Controller
 		// Se llama al método constructor del padre
 		parent::__construct();
 	}
-	
+
+	// creamos un método de acción 
+	public function Index(){
+		// con el objeto que contiene la instancia de View llamamos al método Render que recibe como parámetros el nombre de la clase y el nombre de una vista
+		$this->view->Render($this,"index");
+	}
 }
 
 

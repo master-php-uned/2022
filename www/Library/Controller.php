@@ -3,6 +3,8 @@
 class Controller
 {
 	public function __construct() {
+		// con el objeto view instanciado tenemos acceso a la clase View
+		$this->view = new Views();
 		$this->loadClassmodels();
 	}
 
