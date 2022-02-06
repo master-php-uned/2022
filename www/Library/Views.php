@@ -6,10 +6,10 @@ class Views
 	// la función Render recibe como parametros el nombre del controlador y el nombre de la vista
 	public function Render($controllers,$view){
 		
-		$array = explode("Controller",$controllers);
+		$array = explode("Controller",get_class($controllers));
 
 		$controller = $array[0];
-		echo $controller;
+		require VIEWS.$controller.'/'.$view.'.php';
 	}
 }
 
