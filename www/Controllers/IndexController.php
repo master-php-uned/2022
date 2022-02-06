@@ -1,8 +1,9 @@
 <?php
-class IndexController
+class IndexController extends Controller
 {
 	public function __construct() {
-		echo "El primer controlador";
+		// Se llama al método constructor del padre
+		parent::__construct();
 	}
 	
 }

@@ -1,4 +1,6 @@
 <?php
+// Este archivo permite capturar todas las peticiones que realicen los clientes o usuarios desde la url del navegador
+
 // Se importan las constantes del fichero config.php
 require "config.php";
 
@@ -26,8 +28,9 @@ if(isset($arrayUrl[2])){
 	}
 }
 
-// registramos múltiples métodos para ser llamados secuencialmente
+// registramos múltiples métodos para ser llamados secuencialmente correspondientes a los archivos de la carpeta Library
 spl_autoload_register(function($class){
+	// echo $class;
 	if(file_exists(LBS.$class.".php")){
 		require LBS.$class.".php";
 	}
