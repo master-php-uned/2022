@@ -11957,7 +11957,7 @@ fieldset:disabled .btn {
   }
 }
 
-#login {
-  width: 400px;
+.imglogo {
+  max-width: 100%;
 }
 /*# sourceMappingURL=styles.css.map */

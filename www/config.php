@@ -3,6 +3,6 @@
 const LBS = 'Library/';
 const VIEWS = 'Views/';
 const DFT = 'Default/';
-const RQ = 'Resource/';
+const RQ = 'Assets/';
 const URL = 'http://localhost:8000/';
 ?>
