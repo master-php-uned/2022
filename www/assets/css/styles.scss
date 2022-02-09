@@ -1,10 +1,14 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
-html,
+html {
+	position: relative;
+	min-height: 100vh;
+}
+
 body {
-	height: 100%;
 	background-color: white;
 	color: black;
+	margin-bottom: 120px;
 }
 
 .imglogo {
@@ -12,9 +16,9 @@ body {
 }
 
 .footer {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
-	height: 120px;
+	height: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
