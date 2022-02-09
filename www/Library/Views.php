@@ -9,7 +9,9 @@ class Views
 		$array = explode("Controller",get_class($controllers));
 
 		$controller = $array[0];
+		require VIEWS.DFT."header.php";
 		require VIEWS.$controller.'/'.$view.'.php';
+		require VIEWS.DFT."footer.php";
 	}
 }
 
