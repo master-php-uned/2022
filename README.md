@@ -9,3 +9,8 @@ docker-compose up -d --build
 Ejecutar dentro de la la carpeta www
 
 docker-compose run -rm npm install
+
+## Compilación de SCSS en css
+Ejecutar dentro de la carpeta www
+
+npm run watch
