@@ -1,9 +1,21 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
-// #login {
-// 	width: 400px;
-// }
+html,
+body {
+	height: 100%;
+	background-color: white;
+	color: black;
+}
 
 .imglogo {
 	max-width: 100%;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

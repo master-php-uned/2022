@@ -40,10 +40,8 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       
   npm:
-    build:
-      context: ./
-      dockerfile: node.dockerfile
+    image: node:16-alpine3.11
     volumes: 
       - ./www:/srv/www/api
-    working_dir: /srv/www/api
-    entrypoint: ['npm']
+    working_dir: /srv/www/api/
+    entrypoint: ['npm','run','watch']
