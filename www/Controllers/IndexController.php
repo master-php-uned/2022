@@ -8,8 +8,8 @@ class IndexController extends Controller
 
 	// creamos un método de acción 
 	public function Index(){
-		// con el objeto que contiene la instancia de View llamamos al método Render que recibe como parámetros el nombre de la clase y el nombre de una vista
-		$this->view->Render($this,"index",null);
+		// con el objeto que contiene la instancia de View llamamos al método Render que recibe como parámetros el nombre de la clase y el nombre de una vista, así como las variables de sesión
+		$this->view->Render($this,"index",null,null,null);
 	}
 }
 

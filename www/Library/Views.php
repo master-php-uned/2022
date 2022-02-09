@@ -3,8 +3,8 @@
 
 class Views
 {
-	// la función Render recibe como parametros el nombre del controlador y el nombre de la vista
-	public function Render($controllers,$view,$model1){
+	// la función Render recibe como parametros el nombre del controlador y el nombre de la vista, así como las variables de sesión
+	public function Render($controllers,$view,$model1,$model2,$model3){
 		
 		$array = explode("Controller",get_class($controllers));
 
