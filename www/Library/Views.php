@@ -4,7 +4,7 @@
 class Views
 {
 	// la función Render recibe como parametros el nombre del controlador y el nombre de la vista
-	public function Render($controllers,$view){
+	public function Render($controllers,$view,$model1){
 		
 		$array = explode("Controller",get_class($controllers));
 

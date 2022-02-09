@@ -1,7 +1,16 @@
-<div class="mx-auto w-25 border border-2 rounded-2 p-2 m-2" id="login">
+<div class="mx-auto w-25 border border-2 rounded-2 p-2 m-2 mb-5" id="login">
 		<h3 class="text-center mt-2">Register user</h3>
-		<form method="post" name="register">
-		<div class="row mb-3">
+		<form method="post" action="AddUser" name="register">
+			<div class="row mb-3">
+				<label for="nif" class="col-sm-12 col-form-label">NIF</label>
+				<div class="col-sm-12">
+					<input type="text" class="form-control" name="nif" id="nif" autocomplete="off" placeholder="NIF" value="<?php echo $model1->NIF ?? "" ?>" >
+					<span id="names" class="text-danger">
+						<?php //echo ... ?>
+					</span>
+				</div>
+			</div>
+			<div class="row mb-3">
 				<label for="name" class="col-sm-12 col-form-label">Name</label>
 				<div class="col-sm-12">
 					<input type="text" class="form-control" name="name" id="name" autocomplete="off" placeholder="Name" value="<?php //echo ... ?>" >

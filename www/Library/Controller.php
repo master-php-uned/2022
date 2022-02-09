@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+class Controller extends AnonymousClasses
 {
 	public function __construct() {
 		// con el objeto view instanciado tenemos acceso a la clase View

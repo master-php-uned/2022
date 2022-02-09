@@ -1,4 +1,4 @@
-	<div class="mx-auto w-25 border border-2 rounded-2 p-2 m-2" id="login">
+	<div class="mx-auto w-25 border border-2 rounded-2 p-2 m-2 mb-5" id="login">
 		<h3 class="text-center mt-2">Login</h3>
 		<form method="post" action="Index/Login" name="login">
 			<div class="row mb-3">
