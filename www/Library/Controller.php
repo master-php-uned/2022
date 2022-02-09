@@ -3,6 +3,8 @@
 class Controller extends AnonymousClasses
 {
 	public function __construct() {
+		// LLamamos la clase Session
+		Session::start();
 		// con el objeto view instanciado tenemos acceso a la clase View
 		$this->view = new Views();
 		$this->loadClassmodels();

@@ -5,22 +5,24 @@ class UserController extends Controller {
 	public function __construct() {
 		parent::__construct();
 		// Inicializamos las sesiones
-		session_start();
+		//session_start();
 	}
 
 	public function Register() {
+		$model1 = Session::getSession("model1");
+		$model2 = Session::getSession("model2");
 		// comprobamos si existen la variable de sesión
-		if(isset($_SESSION['model1']) && isset($_SESSION['model2'])){
+		if(null != $model1 || null != $model2){
 			// deserealizamos la variable de sesión
-			$array1 = unserialize($_SESSION['model1']);
-			$array2 = unserialize($_SESSION['model2']);
+			$array1 = unserialize($model1);
+			$array2 = unserialize($model2);
 			if($array1 != null && $array2 != null){
 				// Si los arrays no son nulos damos acceso a la función TUser
 				$model1 = $this->TUser($array1);
 				$model2 = $this->TUser($array2);
 				// Eliminamos la información de las variables de sesión $model1 y $model2
-				$_SESSION['model1'] = "";
-				$_SESSION['model2'] = "";
+				Session::setSession('model1',"");
+				Session::setSession('model2',"");
 				$this->view->Render($this,"register",$model1,$model2,null);
 			}else{
 				$this->view->Render($this,"register",null,null,null);
@@ -62,21 +64,22 @@ class UserController extends Controller {
 			$execute = false;
 		}
 		// Creamos una variable de sesión para almacenar la información en la coockie del navegador, como la información se guarda en un string serializamos el array con el contenido de las variables de tipo POST
-		$_SESSION['model1'] = serialize(array(
+		$model1 = array(
 			$_POST["nif"],
 			$_POST["name"],
 			$_POST["lastName"],
 			$_POST["email"],
 			$_POST["password"],
-		));
+		);
 		// creamos una segunda variable de sesión que almacena el valor de las variables resultado de comprobar si los campos del formulario de registro están vacios, variables de validación
-		$_SESSION['model2'] = serialize(array(
+		Session::setSession('model1',serialize($model1));
+		Session::setSession('model2',serialize(array(
 			$nif,
 			$name,
 			$lastName,
 			$email,
 			$password,
-		));
+		)));
 		// redireccionamos a la vista registrar
 		header('Location: Register');
 	}
