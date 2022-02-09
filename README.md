@@ -10,7 +10,7 @@ Ejecutar dentro de la la carpeta www
 
 docker-compose run -rm npm install
 
-## Compilación de SCSS en css
+## Compilación de SCSS en CSS
 Ejecutar dentro de la carpeta www
 
 npm run watch

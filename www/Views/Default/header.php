@@ -30,7 +30,7 @@
 							<a href="<?php echo URL ?>User/Register" class="nav-link text-dark" title="Manage">Register</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" >Login</a>
+							<a href="<?php echo URL ?>Index/Index" class="nav-link text-dark" >Login</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav flex-grow-1">
