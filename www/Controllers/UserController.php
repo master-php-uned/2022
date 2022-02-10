@@ -64,22 +64,33 @@ class UserController extends Controller {
 			$execute = false;
 		}
 		// Creamos una variable de sesión para almacenar la información en la coockie del navegador, como la información se guarda en un string serializamos el array con el contenido de las variables de tipo POST
+		// Modificamos el array proporcionando una llave para cada elemento del array, guardando en cada llave la información obtenida del formulario por cada elemento, así evitamos obtener información basada en posiciones
 		$model1 = array(
-			$_POST["nif"],
-			$_POST["name"],
-			$_POST["lastName"],
-			$_POST["email"],
-			$_POST["password"],
+			"NIF"=>$_POST["nif"],
+			"Name"=>$_POST["name"],
+			"LastName"=>$_POST["lastName"],
+			"Email"=>$_POST["email"],
+			"Password"=>$_POST["password"],
 		);
 		// creamos una segunda variable de sesión que almacena el valor de las variables resultado de comprobar si los campos del formulario de registro están vacios, variables de validación
 		Session::setSession('model1',serialize($model1));
-		Session::setSession('model2',serialize(array(
-			$nif,
-			$name,
-			$lastName,
-			$email,
-			$password,
-		)));
+
+		// Evaluamos el objeto $execute, en caso de ser falso pasamos la información para obtener los errores en lo campos de texto, en caso de ser verdadero se crea el objeto $value que llama al objeto model de la clase Controller que se inicializa con una instancia de tipo model que creamos en la carpeta Models que contendra un método llamado AddUser que recibe como parametro la función TUser con los elementos del objeto $model1 con la información de nuestro array
+		if ($execute){
+			$value = $this->model->AddUser($this->TUser($model1));
+			Session::setSession('model2',serialize(array(
+				"Password"=>$value,
+			)));
+		}else{
+			Session::setSession('model2',serialize(array(
+				"NIF"=>$nif,
+				"Name"=>$name,
+				"LastName"=>$lastName,
+				"Email"=>$email,
+				"Password"=>$password,
+			)));
+
+		}
 		// redireccionamos a la vista registrar
 		header('Location: Register');
 	}

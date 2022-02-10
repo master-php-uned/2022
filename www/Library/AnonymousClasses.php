@@ -16,11 +16,12 @@ class AnonymousClasses
 			function __construct($array){
 				//Comprobamos si el array contiene información
 				if(0 < count($array)){
-					$this->NIF = $array[0];
-					$this->Name = $array[1];
-					$this->LastName = $array[2];
-					$this->Email = $array[3];
-					$this->Password = $array[4];
+					// Comprovamos si las llaves del array estan vacias, en caso de no estar vacias se inicializa el atributo correspondiente con la información del array y su respectiva llave
+					if (!empty($array["NID"])) {$this->NID = $array["NID"];}
+					if (!empty($array["Name"])){$this->Name = $array["Name"];}
+					if (!empty($array["LastName"])){$this->LastName = $array["LastName"];}
+					if (!empty($array["Email"])){$this->Email = $array["Email"];}
+					if (!empty($array["Password"])){$this->Password = $array["Password"];}
 				}
 			}
 		};
