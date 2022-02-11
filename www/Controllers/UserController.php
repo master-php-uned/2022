@@ -21,8 +21,9 @@ class UserController extends Controller {
 				$model1 = $this->TUser($array1);
 				$model2 = $this->TUser($array2);
 				// Eliminamos la información de las variables de sesión $model1 y $model2
-				Session::setSession('model1',"");
-				Session::setSession('model2',"");
+				// Se quita de aquí para hacer persistente la información
+				//Session::setSession('model1',"");
+				//Session::setSession('model2',"");
 				$this->view->Render($this,"register",$model1,$model2,null);
 			}else{
 				$this->view->Render($this,"register",null,null,null);
@@ -78,20 +79,41 @@ class UserController extends Controller {
 		// Evaluamos el objeto $execute, en caso de ser falso pasamos la información para obtener los errores en lo campos de texto, en caso de ser verdadero se crea el objeto $value que llama al objeto model de la clase Controller que se inicializa con una instancia de tipo model que creamos en la carpeta Models que contendra un método llamado AddUser que recibe como parametro la función TUser con los elementos del objeto $model1 con la información de nuestro array
 		if ($execute){
 			$value = $this->model->AddUser($this->TUser($model1));
-			Session::setSession('model2',serialize(array(
-				"Password"=>$value,
-			)));
+			// Si $value es de tipo boolean redirigimos a la página del usuario
+			if(is_bool($value)){
+				Session::setSession('model1',"");
+				Session::setSession('model2',"");
+				header('Location: User');
+			}else{
+				// en caso contrario se captura una excepción y lo mostramos debajo del último campo de entrada de datos que es el campo password
+				Session::setSession('model2',serialize(array(
+					"Password"=>$value,
+				)));
+				// redireccionamos a la vista registrar
+				header('Location: Register');
+			}
+			
 		}else{
 			Session::setSession('model2',serialize(array(
-				"NIF"=>$nif,
-				"Name"=>$name,
-				"LastName"=>$lastName,
-				"Email"=>$email,
-				"Password"=>$password,
+				"NIF"=>$nif ?? null,
+				"Name"=>$name ?? null,
+				"LastName"=>$lastName ?? null,
+				"Email"=>$email ?? null,
+				"Password"=>$password ?? null,
 			)));
-
+			header('Location: Register');
 		}
-		// redireccionamos a la vista registrar
+	}
+
+	// Con la función User llevamos a cabo el renderizado de la vista user una vez se ha registrado correctamente el usuario
+	public function User(){
+		$this->view->Render($this,"user",null,null,null);
+	}
+
+	// Eliminamos las variables de session 
+	public function Cancel(){
+		Session::setSession('model1',"");
+		Session::setSession('model2',"");
 		header('Location: Register');
 	}
 }

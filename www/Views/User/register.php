@@ -47,10 +47,12 @@
 				</div>
 			</div>
 			<div class="row mb-3">
-				<span class="text-danger">
-					<?php // echo ... ?>
-				</span>
+				<div class="col center">
+					<input type="submit" class="btn btn-info center" name="registerSubmit" value="Register">
+				</div>
+				<div class=" col center">
+					<a href="<?php echo URL ?>User/Cancel" class="btn btn-warning center">Cancel</a>
+				</div>
 			</div>
-			<input type="submit" class="btn btn-info btn-block" name="registerSubmit" value="Register">
 		</form>
 	</div>
