@@ -21,9 +21,13 @@
 			</div>
 			<div class="row mb-3">
 				<span class="text-danger">
-					<?php echo $model2->Password ?? "" ?>
+					<?php echo $model2->Name ?? "" ?>
 				</span>
 			</div>
-			<input type="submit" class="btn btn-info btn-block" name="loginSubmit" value="Login">
+			<div class="row">
+				<div class="col center">
+					<input type="submit" class="btn btn-info btn-block" name="loginSubmit" value="Login">
+				</div>
+			</div>
 		</form>
 	</div>
