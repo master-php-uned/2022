@@ -14,3 +14,8 @@ docker-compose run -rm npm install
 Ejecutar dentro de la carpeta www
 
 npm run watch
+
+## Visualización en el navegador
+En la URL
+
+http://localhost:8000
