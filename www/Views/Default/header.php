@@ -14,6 +14,10 @@
 				<a class="navbar-brand" >
 					<img src="<?php echo URL.RQ ?>images/icons/logotipo.png" class="mx-auto w-25 imglogo me-3"> Ejercicio - Login
 				</a>
+				<?php
+					$user = Session::getSession("User");
+					if(null != $user){
+				?>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -21,17 +25,25 @@
 				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a  class="nav-link text-dark" title="Manage">Hello, Welcome ...</a>
+							<a  class="nav-link text-dark" title="Manage">Hello, Welcome 
+								<?php echo $user["Name"]." ".$user["LastName"] ?>
+							</a>
 						</li>
 						<li class="nav-item">
-							<a  class="nav-link text-dark" title="Manage">Logout</a>
+							<a href="<?php echo URL ?>Index/Logout" class="nav-link text-dark" title="Manage">Logout</a>
 						</li>
-						<li class="nav-item">
+						<?php }
+						if(null == $user){
+						?>
+						<li class="nav-item" style="list-style-type: none;">
+							<a href="<?php echo URL ?>" class="nav-link text-dark" title="Manage">Login</a>
+						</li>
+						<li class="nav-item" style="list-style-type: none;">
 							<a href="<?php echo URL ?>User/Register" class="nav-link text-dark" title="Manage">Register</a>
 						</li>
-						<li class="nav-item">
-							<a href="<?php echo URL ?>Index/Index" class="nav-link text-dark" >Login</a>
-						</li>
+						<?php 
+						}
+						if(null != $user){ ?>
 					</ul>
 					<ul class="navbar-nav flex-grow-1">
 						<li class="nav-item">
@@ -39,6 +51,7 @@
 						</li>
 					</ul>
 				</div>
+				<?php } ?>
 			</div>
 		</nav>
 	</header>
