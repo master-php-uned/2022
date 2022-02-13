@@ -21,7 +21,6 @@
 			</div>
 			<div class="row mb-3">
 				<span class="text-danger">
-					<?php echo $model2->Name ?? "" ?>
 				</span>
 			</div>
 			<div class="row">

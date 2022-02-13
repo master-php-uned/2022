@@ -62,7 +62,17 @@ class IndexController extends Controller
 		Session::setSession('model1',serialize($model1));
 		// evaluamos el objeto $execute
 		if($execute){
-
+			$value = $this->model->Login($this->TUser($model1));
+			if (is_numeric($value)){
+				Session::setSession('model1',"");
+				Session::setSession('model2',"");
+				header('Location: '.URL.'Main/Main');
+			}else{
+				Session::setSession('model2',serialize(array(
+					"Password"=>$value,
+				)));
+				header('Location: '.URL);
+			}
 		}else{
 			// creamos una variable de session model2 y serializamos un array que contiene los mensajes de error
 			Session::setSession('model2',serialize(array(
@@ -72,7 +82,13 @@ class IndexController extends Controller
 			header('Location: '.URL);
 
 		}
+	}
 
+	public function Logout() {
+		Session::setSession('model1',"");
+		Session::setSession('model2',"");
+		Session::setSession('User',"");
+		header('Location: '.URL);
 	}
 }
 
