@@ -43,7 +43,7 @@ class RegisterController extends Controller
             'email.max' => 'El campo Correo Electrónico no ha de tener más de 255 caracteres.',
             'email.unique' => 'El Correo Electrónico ya existe en nuestra base de datos.',
             'password.required' => 'El campo Contraseña es obligatorio.',
-            'password.min' => 'El campo Contraseña ha de contener al menos 8 catacteres.',
+            'password.min' => 'El campo Contraseña ha de contener al menos 8 caracteres.',
             'password.confirmed' => 'Las Contraseñas no coinciden.'
         ]);
     }
