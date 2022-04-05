@@ -11,7 +11,7 @@
                     </div>
 
          
-                    <form class="py-10 px-5" method="POST" action="{{ route('password.update') }}">
+                    <form class="py-10 px-5" method="POST" action="{{ route('password.update') }}" novalidate>
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
