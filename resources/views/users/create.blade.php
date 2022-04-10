@@ -57,10 +57,20 @@
               <input id="password-confirm" type="password" class="p-3 bg-gray-200 rounded form-input w-full" name="password_confirmation" autocomplete="new-password">
             </div>
 
-            {{-- TODO: hacer el select del tipo de usuario --}}
-            {{ $types }}
-
-
+            <div class="flex flex-wrap mb-6">
+                <label class="block text-gray-700 text-sm mb-2" for="type">Tipo de Usuario</label>
+                <select class="p-3 bg-gray-200 rounded form-input w-full @error('type') border-red-500 border @enderror" name="type" id="type">
+                    <option disabled value="">-- Seleccione --</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->type }}</option>
+                    @endforeach
+                </select>
+                @error('type')
+                    <span class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 w-full mt-5 text-sm" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
             <div class="flex flex-wrap">
               <button type="submit" class="bg-teal-500 w-full hover:bg-teal-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline uppercase font-bold">
