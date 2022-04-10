@@ -47,6 +47,17 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'type_id' => 'required',
+        ], [
+            'name.required' => 'El campo Nombre es obligatorio.',
+            'name.string' => 'El campo Nombre no puede ser un número.',
+            'name.max' => 'El campo Nombre no ha de tener más de 255 caracteres.',
+            'email.required' => 'El campo Correo Electrónico es obligatorio.',
+            'email.email' => 'El Correo Electrónico debe ser valido.',
+            'email.unique' => 'El Correo Electrónico ya existe en nuestra base de datos.',
+            'password.required' => 'El campo Contraseña es obligatorio.',
+            'password.min' => 'El campo Contraseña ha de contener al menos 8 caracteres.',
+            'password.confirmed' => 'Las Contraseñas no coinciden.',
+            'type_id.required' => 'El campo Tipo de Usuario es obligatorio'
         ]);
 
         // Almacenar en la base de datos
