@@ -58,14 +58,14 @@
             </div>
 
             <div class="flex flex-wrap mb-6">
-                <label class="block text-gray-700 text-sm mb-2" for="type">Tipo de Usuario</label>
-                <select class="p-3 bg-gray-200 rounded form-input w-full @error('type') border-red-500 border @enderror" name="type" id="type">
+                <label class="block text-gray-700 text-sm mb-2" for="type_id">Tipo de Usuario</label>
+                <select class="p-3 bg-gray-200 rounded form-input w-full @error('type_id') border-red-500 border @enderror" name="type_id" id="type_id">
                     <option disabled value="">-- Seleccione --</option>
                     @foreach ($types as $type)
-                        <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->type }}</option>
+                        <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>{{ $type->type }}</option>
                     @endforeach
                 </select>
-                @error('type')
+                @error('type_id')
                     <span class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 w-full mt-5 text-sm" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

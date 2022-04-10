@@ -17,6 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'type_id',
     ];
 
     // Atributos que deben ocultarse para la serialización
@@ -29,4 +30,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Obtiene el tipo de usuario del usuario via Foreign key, se establece una relación 1:1 entre usuario : tipo de usuario
+    public function type()
+    {
+        return $this->belongsTo(TypeUser::class);
+    }
+
 }

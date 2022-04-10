@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\TypeUser;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -41,24 +43,25 @@ class UsersController extends Controller
     {
         // Validación y mensajes de validación
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            'name.required' => 'El campo Nombre es obligatorio.',
-            'name.string' => 'El campo Nombre no puede ser un número.',
-            'name.max' => 'El campo Nombre no ha de tener más de 255 caracteres.',
-            'email.required' => 'El campo Correo Electrónico es obligatorio.',
-            'email.string' => 'El campo Correo Electrónico no puede ser un número.',
-            'email.email' => 'El Correo Electrónico debe ser valido.',
-            'email.max' => 'El campo Correo Electrónico no ha de tener más de 255 caracteres.',
-            'email.unique' => 'El Correo Electrónico ya existe en nuestra base de datos.',
-            'password.required' => 'El campo Contraseña es obligatorio.',
-            'password.min' => 'El campo Contraseña ha de contener al menos 8 caracteres.',
-            'password.confirmed' => 'Las Contraseñas no coinciden.'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+            'type_id' => 'required',
         ]);
 
-        return "desde store";
+        // Almacenar en la base de datos
+
+        if($data) {
+            $user = new User;
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = Hash::make($data['password']);
+            $user->type_id = $data['type_id'];
+            $user->save();
+        }
+
+        // Redireccionar a la lista de usuarios
+        return redirect()->route('users.index');
     }
 
     /**
