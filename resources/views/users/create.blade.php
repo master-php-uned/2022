@@ -58,6 +58,9 @@
             </div>
 
             {{-- TODO: hacer el select del tipo de usuario --}}
+            {{ $types }}
+
+
 
             <div class="flex flex-wrap">
               <button type="submit" class="bg-teal-500 w-full hover:bg-teal-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline uppercase font-bold">

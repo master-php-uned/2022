@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TypeUser;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -23,7 +24,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        // Cosultas al modelo de typo de usuario
+        $types = TypeUser::all();
+
+        return view('users.create')
+                    ->with('types', $types);
     }
 
     /**

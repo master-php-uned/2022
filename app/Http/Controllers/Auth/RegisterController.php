@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    
+
     //Validación para la solicitud de registro entrante
     protected function validator(array $data)
     {
@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'type_id' => $data['type_id'],
         ]);
     }
 }
