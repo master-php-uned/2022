@@ -6,7 +6,7 @@
 
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	
+
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>{{ config('app.name', 'UNED App') }}</title>
 
@@ -29,7 +29,7 @@
 					<a class="text-2xl text-white" href="{{ url('/') }}">
 							{{ config('app.name', 'UNED App') }}
 					</a>
-					
+
 					<nav class="flex-1 text-right">
 
 						@guest
@@ -64,6 +64,12 @@
 					</div>
 				</div>
 			</nav>
+
+            <div class="bg-gray-700">
+                <nav class="container mx-auto flex space-x-1">
+                    @yield('navigation')
+                </nav>
+            </div>
 
 			<main class="py-4">
 					@yield('content')
