@@ -6,6 +6,11 @@
 
 require('./bootstrap');
 
+// importamos sweetalert2 y su hoja de estilos
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import Vue from 'vue';
+
 window.Vue = require('vue').default;
 
 /**
@@ -20,7 +25,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// Registramos el componente
+// Instalación del plugin sweetalert2
+Vue.use(VueSweetalert2);
+// Registramos el componente eliminar-usuario
 Vue.component('eliminar-usuario', require('./components/EliminarUsuario.vue').default);
 
 /**
