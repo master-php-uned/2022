@@ -5406,7 +5406,12 @@ __webpack_require__.r(__webpack_exports__);
             _this.$swal.fire('Usuario Eliminado!', respuesta.data.mensaje, 'success'); // Eliminar del DOM
 
 
-            _this.$el.parentNode.parentNode.parentNode.removeChild(_this.$el.parentNode.parentNode);
+            _this.$el.parentNode.parentNode.parentNode.removeChild(_this.$el.parentNode.parentNode); // Recargar la página
+
+
+            setTimeout(function () {
+              return window.location.reload();
+            }, 2500);
           })["catch"](function (error) {
             console.log(error);
           });

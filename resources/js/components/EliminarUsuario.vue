@@ -44,6 +44,9 @@ export default {
 
                         // Eliminar del DOM
                         this.$el.parentNode.parentNode.parentNode.removeChild(this.$el.parentNode.parentNode);
+
+                        // Recargar la página
+                        setTimeout( () => window.location.reload(), 2500);
                     })
                     .catch(error => {
                         console.log(error);
