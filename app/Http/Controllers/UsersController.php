@@ -16,7 +16,13 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        // Mostramos un listado de los usuarios
+        // Consulta al modelo de usuario
+        $users = User::Paginate(3);
+
+        // dd($users);
+        // retornamos la vista a la que se pasan los usuarios
+        return view('users.index', compact('users'));
     }
 
     /**

@@ -27708,12 +27708,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Can't find stylesheet to import.\n  ╷\n4 │ @import 'uned_app';\n  │         ^^^^^^^^^^\n  ╵\n  resources/sass/app.scss 4:9  root stylesheet\n    at processResult (/var/www/html/node_modules/webpack/lib/NormalModule.js:758:19)\n    at /var/www/html/node_modules/webpack/lib/NormalModule.js:860:5\n    at /var/www/html/node_modules/loader-runner/lib/LoaderRunner.js:399:11\n    at /var/www/html/node_modules/loader-runner/lib/LoaderRunner.js:251:18\n    at context.callback (/var/www/html/node_modules/loader-runner/lib/LoaderRunner.js:124:13)\n    at /var/www/html/node_modules/sass-loader/dist/index.js:54:7\n    at Function.call$2 (/var/www/html/node_modules/sass/sass.dart.js:99051:16)\n    at render_closure1.call$2 (/var/www/html/node_modules/sass/sass.dart.js:84557:12)\n    at _RootZone.runBinary$3$3 (/var/www/html/node_modules/sass/sass.dart.js:29579:18)\n    at _FutureListener.handleError$1 (/var/www/html/node_modules/sass/sass.dart.js:28099:21)\n    at _Future__propagateToListeners_handleError.call$0 (/var/www/html/node_modules/sass/sass.dart.js:28406:49)\n    at Object._Future__propagateToListeners (/var/www/html/node_modules/sass/sass.dart.js:3909:77)\n    at _Future._completeError$2 (/var/www/html/node_modules/sass/sass.dart.js:28252:9)\n    at _AsyncAwaitCompleter.completeError$2 (/var/www/html/node_modules/sass/sass.dart.js:27900:12)\n    at Object._asyncRethrow (/var/www/html/node_modules/sass/sass.dart.js:3712:17)\n    at /var/www/html/node_modules/sass/sass.dart.js:19793:20");
 
 /***/ }),
 
