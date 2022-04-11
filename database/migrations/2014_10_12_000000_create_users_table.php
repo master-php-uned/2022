@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('type_users', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['member', 'admin', 'guest'])->default('member');
+            $table->enum('type', ['miembro', 'administrador', 'invitado'])->default('miembro');
             $table->timestamps();
         });
 

@@ -52,7 +52,7 @@
               <input id="password-confirm" type="password" class="p-3 bg-gray-200 rounded form-input w-full" name="password_confirmation" autocomplete="new-password">
             </div>
 
-            <input type="hidden" name="type_id" id="type" value="3">
+            <input type="hidden" name="type_id" id="type_id" value="3">
 
             <div class="flex flex-wrap">
               <button type="submit" class="bg-teal-500 w-full hover:bg-teal-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline uppercase font-bold">

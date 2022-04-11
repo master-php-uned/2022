@@ -17,19 +17,19 @@ class TypeUsersSeeder extends Seeder
     public function run()
     {
         DB::table('type_users')->insert([
-            'type' => 'member',
+            'type' => 'miembro',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('type_users')->insert([
-            'type' => 'admin',
+            'type' => 'administrador',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('type_users')->insert([
-            'type' => 'guest',
+            'type' => 'invitado',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
