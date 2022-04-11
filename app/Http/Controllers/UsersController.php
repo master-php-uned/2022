@@ -121,8 +121,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        // comprobamos lo que estamos enviando por la petición axios con json() conectamos php con javascript
+        // return response()->json($user);
+
+        $user->delete();
+
+        return response()->json(['mensaje' => 'Se eliminó el usuario ' . $user->name]);
     }
 }

@@ -5395,8 +5395,21 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: 'No'
       }).then(function (result) {
         if (result.isConfirmed) {
-          // TODO: Enviar petición a axios
-          _this.$swal.fire('Usuario Eliminado!', 'Se eliminó Correctamente', 'success');
+          // Se pasan parámetros
+          var params = {
+            id: _this.userId,
+            _method: 'delete'
+          }; // Enviar petición a axios
+
+          axios.post("/users/".concat(_this.userId), params).then(function (respuesta) {
+            // console.log(respuesta)
+            _this.$swal.fire('Usuario Eliminado!', respuesta.data.mensaje, 'success'); // Eliminar del DOM
+
+
+            _this.$el.parentNode.parentNode.parentNode.removeChild(_this.$el.parentNode.parentNode);
+          })["catch"](function (error) {
+            console.log(error);
+          });
         }
       });
     }

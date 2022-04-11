@@ -25,13 +25,29 @@ export default {
             }).then((result) => {
             if (result.isConfirmed) {
 
-                // TODO: Enviar petición a axios
+                // Se pasan parámetros
+                const params = {
+                    id: this.userId,
+                    _method: 'delete'
+                }
 
-                this.$swal.fire(
-                    'Usuario Eliminado!',
-                    'Se eliminó Correctamente',
-                    'success'
-                )
+                // Enviar petición a axios
+                axios.post(`/users/${this.userId}`, params)
+                    .then(respuesta => {
+                        // console.log(respuesta)
+
+                        this.$swal.fire(
+                            'Usuario Eliminado!',
+                            respuesta.data.mensaje,
+                            'success'
+                        );
+
+                        // Eliminar del DOM
+                        this.$el.parentNode.parentNode.parentNode.removeChild(this.$el.parentNode.parentNode);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             }
             })
         }
