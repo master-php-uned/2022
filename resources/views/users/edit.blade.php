@@ -16,9 +16,11 @@
             <div class="bg-gray-300 text-gray-700 uppercase text-center py-3 px-6 mb-0">
               Editar Usuario {{ $user->name }}
             </div>
-
-            <form class="py-10 px-5" method="POST" action="{{ route('users.store') }}" novalidate>
+            {{-- en el action se pone la ruta de la actualización pasando como parametro el id del usuario a actualizar --}}
+            <form class="py-10 px-5" method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" novalidate>
               @csrf
+              {{-- se utiliza el método PUT para la actualización del recurso --}}
+              @method('PUT')
 
               <div class="flex flex-wrap mb-6">
                 <label for="name" class="block text-gray-700 text-sm mb-2">{{ __('Name') }}</label>
@@ -33,7 +35,7 @@
 
               <div class="flex flex-wrap mb-6">
                 <label for="email" class="block text-gray-700 text-sm mb-2">{{ __('Email Address') }}</label>
-                <input id="email" type="email" class="p-3 bg-gray-200 rounded form-input w-full @error('email') border-red-500 border @enderror" name="email" value="{{ $user->email }}" autocomplete="email">
+                <input id="email" type="email" class="p-3 bg-gray-200 rounded form-input w-full @error('email') border-red-500 border @enderror" name="email" value="{{ $user->email }}" autocomplete="email" disabled>
 
                 @error('email')
                   <span class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 w-full mt-5 text-sm" role="alert">

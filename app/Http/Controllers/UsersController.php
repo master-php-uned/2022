@@ -115,9 +115,34 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // dd($request->all());
+
+        // Validación y mensajes de validación
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'type_id' => 'required',
+        ], [
+            'name.required' => 'El campo Nombre es obligatorio.',
+            'name.string' => 'El campo Nombre no puede ser un número.',
+            'name.max' => 'El campo Nombre no ha de tener más de 255 caracteres.',
+            'type_id.required' => 'El campo Tipo de Usuario es obligatorio'
+        ]);
+
+        // dd($user->name);
+        // Se pasan los datos modificados a la instancia del objeto
+        $user->name = $data['name'];
+        $user->type_id = $data['type_id'];
+
+        // Se guardan los resultados
+        $user->save();
+
+        // redireccionamos
+        return redirect()->route('users.index');
+
+
+
     }
 
     /**
