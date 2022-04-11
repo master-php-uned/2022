@@ -100,11 +100,12 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        // Cosultas al modelo de typo de usuario y paso de valores a la vista
+        // Cosultas al modelo de typo de usuario y paso de valores a la vista junto con los valores de user
         $types = TypeUser::all();
 
         return view('users.edit')
-                    ->with('types', $types);
+                    ->with('types', $types)
+                    ->with('user', $user);
     }
 
     /**

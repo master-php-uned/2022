@@ -51,6 +51,7 @@
                   >{{ $user->type->type }}</a>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
+                  {{-- Se pasa como enlace la ruta para la edición del usuario --}}
                     <a
                         href="{{ route('users.edit', ['user' => $user->id]) }}"
                         class="text-teal-600 hover:text-teal-900 mr-5"
