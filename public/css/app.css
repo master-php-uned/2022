@@ -1,3 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.pagination .page-link {
+  font-size: 0.8rem;
+  margin-right: 2rem;
+}
+.pagination a {
+  color: #38b2ac;
+}
+.pagination span.page-link {
+  color: #718096;
+}
 /*
 ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
 *//*

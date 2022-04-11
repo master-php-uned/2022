@@ -41,7 +41,7 @@
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-
+                    {{ $user->email }}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
@@ -52,7 +52,11 @@
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
                     <a href="#" class="text-teal-600 hover:text-teal-900 mr-5">Editar</a>
-                    <a href="#" class="text-red-600 hover:text-red-900  mr-5">Eliminar</a>
+                    {{-- Se incorpora el elemento de vue en sustitución del enlace --}}
+                    <eliminar-usuario
+                        user-id="{{ $user->id }}"
+                    ></eliminar-usuario>
+
                     <a href="" class="text-blue-600 hover:text-blue-900">Ver</a>
               </td>
             </tr>
