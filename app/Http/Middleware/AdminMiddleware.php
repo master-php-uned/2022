@@ -17,18 +17,18 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        switch(Auth::user()->type_id){
-            case ('1'):
-                return redirect('members');//si es administrador redirige a la ruta members
-            break;
-            case ('2'):
-                return $next($request);//si es administrador continua al Users
-            break;
-			case('3'):
-                return redirect('/');// si es un usuario invitado redirige a la ruta welcome
-			break;
+        if(auth()->check()){
+            switch(Auth::user()->type_id){
+                case ('1'):
+                    return redirect('members');//si es administrador redirige a la ruta members
+                break;
+                case ('2'):
+                    return $next($request);//si es administrador continua al Users
+                break;
+                case('3'):
+                    return redirect('/');// si es un usuario invitado redirige a la ruta welcome
+                break;
+            }
         }
-
-        return $next($request);
     }
 }

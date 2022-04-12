@@ -25,9 +25,9 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Rutas proteguidas
-Route::group(['middleware' => ['auth', "verified"]],
+Route::group(['middleware' => ['auth', "verified", "admin"]],
     function(){
-        // Rutas de usuarios
+        // Rutas de gestion del recurso usuarios
         Route::resource('users', UsersController::class);
 });
 

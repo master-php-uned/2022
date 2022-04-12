@@ -17,16 +17,18 @@ class MemberMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        switch(Auth::user()->type_id){
-            case ('1'):
-                return $next($request);//si es miembro continua en la ruta members
-            break;
-			case('2'):
-                return redirect('users');/// si es un administrador redirige a la ruta users
-			break;
-            case ('3'):
-                return redirect('/');//si es invitado se redirige al welcome
-            break;
+        if(auth()->check()){
+            switch(Auth::user()->type_id){
+                case ('1'):
+                    return $next($request);//si es miembro continua en la ruta members
+                break;
+                case('2'):
+                    return redirect('users');/// si es un administrador redirige a la ruta users
+                break;
+                case ('3'):
+                    return redirect('/');//si es invitado se redirige al welcome
+                break;
+            }
         }
     }
 }

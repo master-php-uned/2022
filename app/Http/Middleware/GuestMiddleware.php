@@ -17,16 +17,18 @@ class GuestMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        switch(Auth::user()->type_id){
-            case ('1'):
-                return redirect('members');//si es administrador redirige a la ruta members
-            break;
-            case('2'):
-                return redirect('users');// si es un administrador redirige al Users
-            break;
-            case ('3'):
-                return $next($request);//si es el usuario invitado continua al welcome
-            break;
+        if(auth()->check()){
+            switch(Auth::user()->type_id){
+                case ('1'):
+                    return redirect('members');//si es administrador redirige a la ruta members
+                break;
+                case('2'):
+                    return redirect('users');// si es un administrador redirige al Users
+                break;
+                case ('3'):
+                    return $next($request);//si es el usuario invitado continua al welcome
+                break;
+            }
         }
     }
 }
