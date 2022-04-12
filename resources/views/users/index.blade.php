@@ -61,7 +61,7 @@
                         user-id="{{ $user->id }}"
                     ></eliminar-usuario>
 
-                    <a href="" class="text-blue-600 hover:text-blue-900">Ver</a>
+                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
               </td>
             </tr>
             @endforeach
