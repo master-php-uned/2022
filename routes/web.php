@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\GuestsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MembersController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,13 @@ Route::group(['middleware' => ['auth', "verified", "admin"]],
         Route::resource('users', UsersController::class);
 });
 
+Route::group([
+        'middleware' => ['auth', "verified"]
+    ],
+    function(){
+        // Rutas para usuarios miembros
+        Route::get('members', [MembersController::class, 'index'])->name('members.index');
 
-
-
+        // Rutas para usuarios invitados
+        Route::get('guests', [GuestsController::class, 'index'])->name('guests.index');
+});

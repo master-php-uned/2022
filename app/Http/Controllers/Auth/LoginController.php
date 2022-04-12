@@ -25,8 +25,8 @@ class LoginController extends Controller
         $guest = Auth::user()->type_id == '3';
 
         $this->redirectTo = $admin ? route('users.index') :
-                            ($member ? route('members') :
-                            ($guest ? route('guest') : route('guest')));
+                            ($member ? route('members.index') :
+                            ($guest ? route('guests.index') : route('guests.index')));
 
         return $this->redirectTo;
     }
