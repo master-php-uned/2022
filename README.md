@@ -27,10 +27,10 @@ Desde la carpeta raiz de la rama Ej2 efectuar las siguientes operaciones:
     - sail npm run dev
 
 * Efectuar las migraciones y el sembrado de las tablas con:
-    -sail artisan migrate --seed
+    - sail artisan migrate --seed
 
 * Compilación de los assets en desarrollo con:
-    -sail npm run watch-poll
+    - sail npm run watch-poll
 
 * Visualización en el navegador en:
-    -http://localhost
+    - http://localhost
