@@ -7,7 +7,11 @@
 
 @section('content')
 <h1 class="text-2xl text-center mt-10">Administrar Usuarios</h1>
-
+<div class="flex justify-end mb-4">
+    <a href="{{ URL::to('#') }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 rounded">
+        Exportar a PDF
+    </a>
+</div>
 <div class="flex flex-col mt-10">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">

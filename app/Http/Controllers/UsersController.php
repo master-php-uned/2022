@@ -6,6 +6,7 @@ use App\Models\TypeUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class UsersController extends Controller
 {
@@ -167,5 +168,18 @@ class UsersController extends Controller
         $user->delete();
 
         return response()->json(['mensaje' => 'Se eliminó el usuario ' . $user->name]);
+    }
+
+    // Generate PDF
+    public function createPDF() {
+        // recupera todos los registros de la base de datos
+        $data = User::all();
+
+        // compartimos los datos con la vista
+        view()->share('user', $data);
+        $pdf = PDF::loadView('pdf_view', $data);
+
+        // descarga fichero PDF con el método download
+        return $pdf->download('pdf_file.pdf');
     }
 }
