@@ -17,17 +17,17 @@
             <table class="min-w-full">
               <thead class="bg-gray-100 ">
                 <tr>
-                  <th class="px-6 py-3 border-b border-gray-200  text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                  <th class="px-6 py-3 border-b border-gray-200  text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                     Nombre
                   </th>
-                  <th class="px-6 py-3 border-b border-gray-200  text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                  <th class="px-6 py-3 border-b border-gray-200  text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                       Correo Eléctronico
                     </th>
-                    <th class="px-6 py-3 border-b border-gray-200  text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                    <th class="px-6 py-3 border-b border-gray-200  text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                         Tipo de usuario
                   </th>
-                  <th class="px-6 py-3 border-b border-gray-200  text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                      Acciones
+                  <th class="px-6 py-3 border-b border-gray-200  text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                      # Identificador
                     </th>
                 </tr>
             </thead>
@@ -39,33 +39,23 @@
 
                                 <div class="ml-4">
                                     <div class="text-sm leading-5 font-medium text-gray-900">{{ $user->name }} </div>
-                      </div>
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                        {{ $user->email }}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    <a
-                    href=""
-                    class="text-gray-500 hover:text-gray-600"
-                    >{{ $user->type->type }}</a>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                    {{-- Se pasa como enlace la ruta para la edición del usuario --}}
-                    <a
-                    href="{{ route('users.edit', ['user' => $user->id]) }}"
-                    class="text-teal-600 hover:text-teal-900 mr-5"
-                    >Editar</a>
-                    {{-- Se incorpora el elemento de vue en sustitución del enlace --}}
-                    <eliminar-usuario
-                    user-id="{{ $user->id }}"
-                    ></eliminar-usuario>
-
-                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
-                </td>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                {{ $user->email }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                            <a
+                            href=""
+                            class="text-gray-500 hover:text-gray-600"
+                            >{{ $user->type->type }}</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
+                            <div class="text-sm text-center leading-5 font-medium text-gray-900">{{ $user->id }} </div>
+                        </td>
                 </tr>
                 @endforeach
         </tbody>
