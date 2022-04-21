@@ -1,7 +1,7 @@
 <template>
 <!-- en el evento click se llama al método eliminarUsuario() -->
     <button
-        class="text-red-600 hover:text-red-900  mr-5"
+        class="text-red-600 hover:text-red-900 mr-5 font-semibold"
         @click="eliminarUsuario"
         >Eliminar</button>
 </template>

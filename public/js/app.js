@@ -28469,7 +28469,7 @@ var render = function () {
   return _c(
     "button",
     {
-      staticClass: "text-red-600 hover:text-red-900  mr-5",
+      staticClass: "text-red-600 hover:text-red-900 mr-5 font-semibold",
       on: { click: _vm.eliminarUsuario },
     },
     [_vm._v("Eliminar")]

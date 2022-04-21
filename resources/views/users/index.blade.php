@@ -8,7 +8,7 @@
 @section('content')
 <h1 class="text-2xl text-center mt-10">Administrar Usuarios</h1>
 <div class="flex justify-end mb-4">
-    <a href="{{ route('users.createPDF') }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 rounded">
+    <a href="{{ route('users.createPDF', ['user' => null]) }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 rounded">
         Exportar a PDF
     </a>
 </div>
@@ -58,7 +58,7 @@
                   {{-- Se pasa como enlace la ruta para la edición del usuario --}}
                     <a
                         href="{{ route('users.edit', ['user' => $user->id]) }}"
-                        class="text-teal-600 hover:text-teal-900 mr-5"
+                        class="text-orange-500 hover:text-orange-800 mr-5"
                     >Editar</a>
                     {{-- Se incorpora el elemento de vue en sustitución del enlace --}}
                     <eliminar-usuario
@@ -66,6 +66,10 @@
                     ></eliminar-usuario>
 
                     <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
+
+                    <a href="{{ route('users.createPDF', ['user' => $user->id]) }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 ml-3 rounded">
+                        Exportar a PDF
+                    </a>
               </td>
             </tr>
             @endforeach

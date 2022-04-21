@@ -170,23 +170,21 @@ class UsersController extends Controller
         return response()->json(['mensaje' => 'Se eliminó el usuario ' . $user->name]);
     }
 
-    public function showAll(){
-        // mostramos todos los usuarios
-        $users = User::all();
-
-         // retornamos la vista a la que se pasan los usuarios
-         return view('users.all', compact('users'));
-    }
-
     // Generate PDF
-    public function createPDF() {
+    public function createPDF(User $user = null) {
         // recupera todos los registros de la base de datos
         $users = User::all();
 
         // compartimos los datos con la vista
         view()->share('users.all', $users);
+        view()->share('users.one', $user);
         // dd($data);
-        $pdf = PDF::loadView('users.all', compact('users'));
+
+        if ($user) {
+            $pdf = PDF::loadView('users.one', compact('user'));
+        } else if($users) {
+            $pdf = PDF::loadView('users.all', compact('users'));
+        }
 
         // visualizar el pdf
         return $pdf->stream('Listado_usuarios.pdf');

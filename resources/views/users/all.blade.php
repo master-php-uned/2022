@@ -32,13 +32,13 @@
                 </tr>
             </thead>
               <tbody class="bg-white">
-                  @foreach ($users as $user)
-                  <tr>
-                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div class="flex items-center">
+                @foreach ($users as $user)
+                    <tr>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <div class="flex items-center">
 
-                      <div class="ml-4">
-                        <div class="text-sm leading-5 font-medium text-gray-900">{{ $user->name }} </div>
+                                <div class="ml-4">
+                                    <div class="text-sm leading-5 font-medium text-gray-900">{{ $user->name }} </div>
                       </div>
                     </div>
                 </td>
@@ -57,23 +57,21 @@
                     {{-- Se pasa como enlace la ruta para la edición del usuario --}}
                     <a
                     href="{{ route('users.edit', ['user' => $user->id]) }}"
-                            class="text-teal-600 hover:text-teal-900 mr-5"
-                            >Editar</a>
-                            {{-- Se incorpora el elemento de vue en sustitución del enlace --}}
-                            <eliminar-usuario
-                            user-id="{{ $user->id }}"
-                        ></eliminar-usuario>
+                    class="text-teal-600 hover:text-teal-900 mr-5"
+                    >Editar</a>
+                    {{-- Se incorpora el elemento de vue en sustitución del enlace --}}
+                    <eliminar-usuario
+                    user-id="{{ $user->id }}"
+                    ></eliminar-usuario>
 
-                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
-                    </td>
+                    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
+                </td>
                 </tr>
                 @endforeach
-
-
-            </tbody>
+        </tbody>
             </table>
         </div>
     </div>
-      </div>
-    </body>
-    </html>
+</div>
+</body>
+</html>
