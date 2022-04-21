@@ -8,7 +8,7 @@
 @section('content')
 <h1 class="text-2xl text-center mt-10">Administrar Usuarios</h1>
 <div class="flex justify-end mb-4">
-    <a href="{{ URL::to('#') }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 rounded">
+    <a href="{{ route('users.createPDF') }}" class="text-teal-600 hover:text-teal-800 border-2 border-teal-600 hover:border-teal-800 p-2 rounded">
         Exportar a PDF
     </a>
 </div>

@@ -6,7 +6,7 @@ use App\Models\TypeUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class UsersController extends Controller
 {
@@ -170,16 +170,27 @@ class UsersController extends Controller
         return response()->json(['mensaje' => 'Se eliminó el usuario ' . $user->name]);
     }
 
+    public function showAll(){
+        // mostramos todos los usuarios
+        $users = User::all();
+
+         // retornamos la vista a la que se pasan los usuarios
+         return view('users.all', compact('users'));
+    }
+
     // Generate PDF
     public function createPDF() {
         // recupera todos los registros de la base de datos
-        $data = User::all();
+        $users = User::all();
 
         // compartimos los datos con la vista
-        view()->share('user', $data);
-        $pdf = PDF::loadView('pdf_view', $data);
+        view()->share('users.all', $users);
+        // dd($data);
+        $pdf = PDF::loadView('users.all', compact('users'));
 
+        // visualizar el pdf
+        return $pdf->stream('Listado_usuarios.pdf');
         // descarga fichero PDF con el método download
-        return $pdf->download('pdf_file.pdf');
+        // return $pdf->download('pdf_file.pdf');
     }
 }

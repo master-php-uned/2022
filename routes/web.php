@@ -29,6 +29,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Rutas proteguidas
 Route::group(['middleware' => ['auth', "verified", "admin"]],
     function(){
+        // Ruta generación PDF usuarios
+        Route::get('usersAll', [UsersController::class, 'showAll'])->name('users.all');
+        Route::get('users/pdf', [UsersController::class, 'createPDF'])->name('users.createPDF');
         // Rutas de gestion del recurso usuarios
         Route::resource('users', UsersController::class);
 });
