@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="cerrarVentana()">Cerrar</button>
             </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
         props:['identificador'],
         data(){
             return {
-                url: "", 
+                url: "",
                 video: null,
             }
         },
@@ -38,6 +38,19 @@
             {
                 this.video = videoact;
                 this.url = "https://www.youtube.com/embed/" + this.video.videoid; // url de youtube
+            },
+            /**
+             * cerrar la ventana
+             * @return void
+             */
+            cerrarVentana()
+            {
+                // eliminar url de iframe, para que deje de reproducirse el vídeo
+                this.url = "";
+                // cerrar ventana de reproducción
+                // let d = document.getElementById(this.identificador);
+                // let m = bootstrap.Modal.getInstance(d);
+                // m.hide();
             },
 
         },
