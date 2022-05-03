@@ -23,9 +23,10 @@ Route::put('/categoria/porid', 'CategoriaController@categoriasPorID');
 Route::put('/categoria/convideo', 'CategoriaController@categoriasConVideo');
 Route::put('/video/buscar', 'VideoController@buscar');
 
-/*Route::middleware(['ldapauth'])->group(function () 
+/*Route::middleware(['ldapauth'])->group(function ()
 {*/
     Route::apiResource('/canal', 'CanalController');
+    Route::apiResource('/lista', 'ListaController');
     Route::put('/categoria/cambiovisibilidad/{idcategoria}', 'CategoriaController@cambiarVisible');
     Route::apiResource('/categoria', 'CategoriaController');
     Route::put('/video/visibilidad', 'VideoController@cambiarVisibilidad');
@@ -38,6 +39,7 @@ Route::put('/video/buscar', 'VideoController@buscar');
     Route::apiResource('/administrador', 'AdministradorController');
     Route::put('/video/puntos/puntuar', 'VideoController@puntuar');
     Route::put('canal/purgar/{idcanal}', 'CanalController@purgar');
-    
+    Route::put('lista/purgar/{idlista}', 'ListaController@purgar');
+
 /*});*/
 ?>
