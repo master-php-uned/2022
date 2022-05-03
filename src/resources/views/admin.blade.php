@@ -22,7 +22,7 @@
     </head>
     <body class="antialiased">
         <div id='app'>
-            <!-- cabecera -->        
+            <!-- cabecera -->
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm innovanda_cabecera">
                 <div class="container">
                     <img src="{{ asset('img/LogoAdminFlix.png') }}" class='logo'/>
@@ -32,6 +32,7 @@
                     <!-- menú -->
                     <div class="btn-group" role="group" aria-label="Men&uacute;">
                         <a class="btn btn-outline-dark" href="/admin/canales" role="button">Canales</a>
+                        <a class="btn btn-outline-dark" href="/admin/listas" role="button">Listas</a>
                         <a class="btn btn-outline-dark" href="/admin/categorias" role="button">Categor&iacute;as</a>
                         <a class="btn btn-outline-dark" href="/admin/videos" role="button">V&iacute;deos</a>
                         @if($administrador)
@@ -50,8 +51,8 @@
             </nav>
             <!-- contenido -->
             <div class='innovanda_contenido'>
-                @yield('contenido')            
-            
+                @yield('contenido')
+
             </div>
         </div>
     </body>
