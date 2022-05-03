@@ -13,17 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('admin')->group(function () 
+Route::prefix('admin')->group(function ()
 {
-    
+
     Route::get('/login', 'LdapController@login');
     Route::post('/login', 'LdapController@autentificar');
     Route::get('/logout', 'LdapController@logout');
 
-    Route::middleware(['ldapauth'])->group(function () 
+    Route::middleware(['ldapauth'])->group(function ()
     {
-        Route::get('/', 'AdminController@canales'); 
+        Route::get('/', 'AdminController@canales');
         Route::get('/canales', 'AdminController@canales');
+        Route::get('/listas', 'AdminController@listas');
         Route::get('/categorias', 'AdminController@categorias');
         Route::get('/videos', 'AdminController@videos');
         Route::get('/administradores', 'AdminController@administradores');

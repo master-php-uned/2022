@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Config;
 use Google\Client;
 use App\Models\Canal;
 use App\Models\ListaReproduccion;
+use App\Models\Lista;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -31,7 +32,7 @@ class DatosYoutube
         $this->cliente->setDeveloperKey(Config::get('youtube.youtube_key'));
 
         $this->fecha = $fecha;
-        
+
         // leer contador actual
         $act = DB::table('contadorconsultas')->first();
         // si el anterior a la fecha actual iniciar contador
@@ -62,7 +63,7 @@ class DatosYoutube
         if ($this->cuenta < $this->limiteConsultas) return true;
         else return false;
     }
-    
+
     /**
      * Obtener los datos de un canal por el channelid
      * @param string $id  id de canal
@@ -86,7 +87,7 @@ class DatosYoutube
             $canal->fecha = str_replace(array("T", "Z"), array(" ", ""), $resultado->items[0]->snippet->publishedAt);
             $canal->imagen = $resultado->items[0]->snippet->thumbnails->medium->url;
             $canal->etagDatos = $resultado->items[0]->etag;
-            
+
             return $canal;
         }
         else return null;
@@ -121,7 +122,7 @@ class DatosYoutube
                 $canal->etagDatos = $resultado->items[$i]->etag;
                 $canales[] = $canal;
             }
-            
+
             return $canales;
         }
         else return null;
@@ -129,7 +130,7 @@ class DatosYoutube
 
     /**
      * Obtener los datos de canal por customURL
-     * @param string $url  
+     * @param string $url
      * @return Canal|null
      */
     public function getDatosCanalPorCURL($url)
@@ -148,7 +149,7 @@ class DatosYoutube
         $documento = new \DOMDocument();
         // cargar contenido de la página, ignorando avisos
         @$documento->loadHTML($info);
-        // crear selector para búsqueda de partes    
+        // crear selector para búsqueda de partes
         $selector = new \DOMXPath($documento);
 
         // buscar el nodo "meta" que contiene la información referida al channelid
@@ -194,7 +195,7 @@ class DatosYoutube
             $lr = new ListaReproduccion();
             $lr->listid = $resultado->items[0]->contentDetails->relatedPlaylists->uploads;
             $lr->idcanal = $id;
-            
+
             return $lr;
         }
         else return null;
@@ -205,9 +206,9 @@ class DatosYoutube
      * @param string $id  id de canal en base de datos
      * @param string $channelid identificador de canal en Youtube
      * @param string $etag valor etag para lista reproducción de canal. Para conocer si cambió listas de reproducción desde última consulta.
-     * @return ListaReproduccion[]|null
+     * @return Lista[]|null
      */
-    /*public function getListasReproduccionCanalPorId($id, $channelid, &$etag)
+    public function getListasReproduccionCanalPorId($id, $channelid, &$etag)
     {
         $lrTotal = array();
         // obtener datos de listas de reproducción por ChannelID
@@ -227,8 +228,8 @@ class DatosYoutube
             {
                 foreach ($resultado->items as $item)
                 {
-                    // crear objeto lista de reproducción con datos
-                    $lr = new ListaReproduccion();
+                    // crear objeto lista (playlist) con datos
+                    $lr = new Lista();
                     $lr->listid = $item->id;
                     $lr->idcanal = $id;
                     $lr->nombre = $item->snippet->title;
@@ -244,7 +245,7 @@ class DatosYoutube
         while (strlen($nextToken) > 0); // seguir enviando solicitudes mientras queden resultados por recuperar
         $etag = $resultado->etag;
         return $lrTotal;
-    }*/
+    }
 
     /**
      * Obtener videos de listas de reproducción por el listid
@@ -310,7 +311,7 @@ class DatosYoutube
         {
             // comprobar límite
             if (!$this->dentroLimite()) return;
- 
+
             // crear lista de identificadores
             $ids = array();
             foreach($grupoactual as $vactual) $ids[] = $vactual->videoid;
@@ -322,7 +323,7 @@ class DatosYoutube
 
             if ($resultado->pageInfo->totalResults > 0)
             {
-                
+
                 foreach ($resultado->items as $item)
                 {
                     $videoid = $item->id;
@@ -343,7 +344,7 @@ class DatosYoutube
                                 {
                                     $vactual->proporcion = floatval($item->player->embedWidth) / floatval($item->player->embedHeight);
                                 }
-                                
+
                                 // estadísticas
                                 $vactual->estrep = (isset($item->statistics->viewCount) ? $item->statistics->viewCount : 0); // Cantidad de veces que se ha reproducido el vídeo.
                                 $vactual->estgusta = (isset($item->statistics->likeCount) ? $item->statistics->likeCount : 0); // Número de usuarios que indicaron que les gustó el video, dándole una calificación positiva.

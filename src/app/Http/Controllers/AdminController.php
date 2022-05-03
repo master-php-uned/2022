@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Página administración de canales 
+     * Página administración de canales
      *
      * @return Renderable
      */
@@ -33,7 +33,21 @@ class AdminController extends Controller
     }
 
     /**
-     * Página administración de categorías 
+     * Página administración de playlists
+     *
+     * @return Renderable
+     */
+    public function listas()
+    {
+        return view('adminlistas',
+            [
+                'usuario' => Auth::guard('admin')->user()->name,
+                'administrador' => session('administrador'),
+            ]);
+    }
+
+    /**
+     * Página administración de categorías
      *
      * @return Renderable
      */
@@ -47,7 +61,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Página administración de vídeos 
+     * Página administración de vídeos
      *
      * @return Renderable
      */
