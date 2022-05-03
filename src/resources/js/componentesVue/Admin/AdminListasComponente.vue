@@ -1,0 +1,232 @@
+<template>
+    <div>
+        <dialogo-canal-categorias-componente identificador="dialogoCanalCategorias"  ref="dialogoCat"
+            :canalid="catCanalid" :categorias="categorias" v-on:seleccionCat="categoriaSeleccionada" :trabajando="selCatTrabajando">
+        </dialogo-canal-categorias-componente>
+
+        <div class='anadir'>
+            <button class="btn btn-primary" @click="abrirNuevaLista()">Añadir Lista</button>
+        </div>
+
+        <dialogo-nueva-lista-componente identificador="dialogoNuevo" ref="tollo"  v-on:nuevaLista="nuevaLista" >
+        </dialogo-nueva-lista-componente>
+
+        <dialogo-confirmacion-componente id="conf" texto="¿Seguro que quiere eliminar esta lista y todos sus videos asociados?"
+            v-on:respuesta="respuestaEliminar"></dialogo-confirmacion-componente>
+
+        <dialogo-confirmacion-componente id="conf2" texto="¿Seguro que quiere purgar esta lista y todos sus videos asociados?"
+            v-on:respuesta="respuestaPurgar"></dialogo-confirmacion-componente>
+
+        <div class="container-fluid">
+            <div class="row row-cols-auto">
+                <entrada-lista-componente v-for="lista in listas" :key="lista.id" :lista="lista" v-on:eliminar="eliminar"  v-on:purgar="purgar"
+                    v-on:selCategoria="seleccionCategoria" :categorias="categorias" :administrador="administrador">
+                </entrada-lista-componente>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import DialogoConfirmacionComponente from './DialogoConfirmacionComponente.vue';
+
+    export default {
+        components: { DialogoConfirmacionComponente },
+
+        /**
+         * Indica si el usuario actual es administrador
+         */
+        props:['administrador'],
+
+        data(){
+            return {
+                listas: [], // listado de playlists
+                listaEliminar: null, // id de playlist a eliminar
+                catListaid: 0, // id de playlist a cambiar categorías
+                catListacat: [], // categorías actuales del playlist a modificar
+                categorias: [], // listado de categorias
+                selCatTrabajando: false, // se están guardando las categorías seleccionadas en el servidor
+                catCanalid: "", //
+            }
+        },
+        mounted() {
+            // obtener listado de playlists
+            axios.get('/api/lista').then((response) =>
+            {
+                this.listas = response.data;
+            });
+
+            // cargar listado de categorías
+            axios.get('/api/categoria').then((response) =>
+            {
+                this.categorias = response.data;
+            });
+
+        },
+        methods: {
+            /**
+             * Abrir ventana para nueva lista
+             */
+            abrirNuevaLista() {
+                // abrir ventana modal
+                let d = document.getElementById('dialogoNuevo');
+                let x = new bootstrap.Modal(d, {backdrop: true});
+                x.show();
+            },
+            /**
+             * Añadir al listado de playlist los datos de las listas añadidas
+             */
+            nuevaLista(lista) {
+                if (Array.isArray(lista))
+                {
+                    lista.forEach(element => {
+                        this.listas.unshift(element);
+                    });
+                }
+                else this.listas.unshift(lista);
+
+                // cerrar ventana modal de añadir lista
+                let d = document.getElementById('dialogoNuevo');
+                let m = bootstrap.Modal.getInstance(d);
+                m.hide();
+            },
+            /**
+             * Se recibe de componente hijo orden de eliminar lista.
+             * Mostrar ventana modal de confirmación
+             * @param int idLista identificada en base de datos de la lista a eliminar
+             */
+            eliminar(idLista) {
+                this.canalEliminar = idLista;
+                // abrir ventana de confirmación
+                let d = document.getElementById('conf');
+                let x = new bootstrap.Modal(d, {backdrop: 'static'});
+                x.show();
+            },
+            /**
+             * Se recibe de componente hijo orden de purgar canal.
+             * Mostrar ventana modal de confirmación
+             * @param int idCanal identificador en base de datos del canal a purgar
+             */
+            purgar(idCanal) {
+                this.canalEliminar = idCanal;
+                // abrir ventana de confirmación
+                let d = document.getElementById('conf2');
+                let x = new bootstrap.Modal(d, {backdrop: 'static'});
+                x.show();
+            },
+            /**
+             * Se analiza la respuesta del usuario a mensaje de eliminación.
+             * Si positivo enviar orden de eliminación a API de aplicación
+             */
+            respuestaEliminar(resp){
+                // ocultar ventana de confiramción
+                let d = document.getElementById('conf');
+                let x = bootstrap.Modal.getInstance(d);
+                x.hide();
+
+                if (resp) // eliminar canal
+                {
+                    axios.delete('/api/canal/' + this.canalEliminar).then((response) =>
+                    {
+                        //buscar la posición en el vector del canal a eliminar
+                        for(var i=0; i < this.canales.length; i++)
+                        {
+                            if (this.canales[i].id == this.canalEliminar) break;
+                        }
+                        // eliminar canal de vector
+                        this.canales.splice(i, 1);
+                    });
+                }
+            },
+            /**
+             * Se analiza la respuesta del usuario a mensaje de purga.
+             * Si positivo enviar orden de purga a API de aplicación
+             */
+            respuestaPurgar(resp){
+                // ocultar ventana de confiramción
+                let d = document.getElementById('conf2');
+                let x = bootstrap.Modal.getInstance(d);
+                x.hide();
+
+                if (resp) // purgar canal
+                {
+                    axios.put('/api/canal/purgar/' + this.canalEliminar).then((response) =>
+                    {
+                        //buscar la posición en el vector del canal a eliminar
+                        for(var i=0; i < this.canales.length; i++)
+                        {
+                            if (this.canales[i].id == this.canalEliminar) break;
+                        }
+                        // eliminar canal de vector
+                        this.canales.splice(i, 1);
+                    });
+                }
+            },
+            /**
+             * Se recibe de componente hijo orden de abrir ventana para selección de categorías.
+             * @param int idVideo identificadro en base de datos del canal
+             * @param int[] categorias lista de categorías del canal
+             */
+            seleccionCategoria(idCanal, categorias) {
+                this.catCanalid = idCanal; // estbalecer el identificador del video a tratar
+
+                this.catCanalcat.splice(0); // vaciar vector
+                // insertar identificadores de categorías actuales del canal
+                for (let i=0; i < categorias.length; i++)
+                {
+                    this.catCanalcat.push(categorias[i].idcategoria);
+                }
+
+                // abrir ventana de selección de categorías
+                let d = document.getElementById('dialogoCanalCategorias');
+                let x = new bootstrap.Modal(d, {backdrop: 'static'});
+                x.show();
+            },
+            /**
+             * Actualizar en base de datos e interfaz las nueva selección de categorías para el vídeo
+             */
+            categoriaSeleccionada(catid) {
+                const parametros = {cat: catid};
+                this.selCatTrabajando = true;
+
+                // comprobar si el canal ya tiene esa categoría. no enviar datos a servidor.
+                if (this.catCanalcat.indexOf(catid) > -1)
+                {
+                    // cerrar ventana modal
+                    let d = document.getElementById('dialogoCanalCategorias');
+                    let m = bootstrap.Modal.getInstance(d);
+                    m.hide();
+
+                    this.selCatTrabajando = false;
+
+                    return;
+                }
+
+                // llamada a API de aplicación para asignar categoría
+                axios.put('/api/canal/categorias/' + this.catCanalid, parametros).then((respuesta) =>
+                {
+                    if (respuesta.data.error) // error en operación
+                    {
+                        alert(respuesta.data.error);
+                    }
+                    else
+                    {
+                        // buscar entrada de video y modificar su listado de categorías
+                        for(let i=0; i < this.canales.length; i++)
+                        {
+                            if (this.canales[i].id == this.catCanalid)
+                            {
+                                this.canales[i].categorias.push({idcategoria: catid}); // añadir nueva categoría
+                                break;
+                            }
+                        }
+                        // cerrar ventana modal
+                        let d = document.getElementById('dialogoCanalCategorias');
+                        let m = bootstrap.Modal.getInstance(d);
+                        m.hide();
+                    }
+                    this.selCatTrabajando = false;
+                });
+            },
+        }
+    }
+</script>
